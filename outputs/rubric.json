@@ -1,0 +1,42 @@
+[
+  {
+    "id": "fx-lock",
+    "statement": "The FX rate is locked at the moment the top-up is initiated.",
+    "critical": true
+  },
+  {
+    "id": "credit-before-debit",
+    "statement": "The destination wallet is credited before the funding source is debited.",
+    "critical": true
+  },
+  {
+    "id": "timeout-after-5s",
+    "statement": "The payment-provider callback timeout occurs after 5 seconds.",
+    "critical": true
+  },
+  {
+    "id": "rollback-on-timeout",
+    "statement": "A timed-out provider callback rolls the transaction back.",
+    "critical": true
+  },
+  {
+    "id": "neither-side-affected",
+    "statement": "After rollback, neither the destination wallet nor the funding source is affected.",
+    "critical": true
+  },
+  {
+    "id": "approval-above-10000",
+    "statement": "Top-ups above SGD 10,000 require approval before settling.",
+    "critical": true
+  },
+  {
+    "id": "second-owner-approval",
+    "statement": "The required approval comes from a second business owner.",
+    "critical": true
+  },
+  {
+    "id": "no-settle-before-approval",
+    "statement": "A top-up that requires approval does not settle before that approval.",
+    "critical": true
+  }
+]

@@ -1,0 +1,367 @@
+{
+  "run_id": "run-01",
+  "status": "completed",
+  "degraded_reason": null,
+  "tests": [
+    {
+      "test_case_id": "tc-1",
+      "quality_score": 9.0,
+      "spec_coverage_score": 0.0,
+      "coverage_ratio": 0,
+      "correctness_score": 2.0,
+      "bug_detection_score": 1.0,
+      "llm_correctness_score": 2.0,
+      "llm_bug_detection_score": 1.0,
+      "assessments": [
+        {
+          "requirement_id": "fx-lock",
+          "status": "not_applicable",
+          "evidence": "Initiate top-up of SGD 500",
+          "reasoning": "The test does not address FX rate locking.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "credit-before-debit",
+          "status": "not_applicable",
+          "evidence": "Check wallet balance increases",
+          "reasoning": "The test only checks final balance, not the order of credit and debit.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "timeout-after-5s",
+          "status": "not_applicable",
+          "evidence": "Initiate top-up of SGD 500",
+          "reasoning": "No timeout behavior is exercised.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "rollback-on-timeout",
+          "status": "not_applicable",
+          "evidence": "Check wallet balance increases",
+          "reasoning": "Rollback is not part of this test.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "neither-side-affected",
+          "status": "not_applicable",
+          "evidence": "Wallet balance increases by SGD 500",
+          "reasoning": "The test does not consider rollback effects.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "approval-above-10000",
+          "status": "not_applicable",
+          "evidence": "Initiate top-up of SGD 500",
+          "reasoning": "Amount is below the approval threshold.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "second-owner-approval",
+          "status": "not_applicable",
+          "evidence": "Check wallet balance increases",
+          "reasoning": "No approval step is involved.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "no-settle-before-approval",
+          "status": "not_applicable",
+          "evidence": "Wallet balance increases by SGD 500",
+          "reasoning": "Settlement timing is not examined.",
+          "llm_status": "not_applicable"
+        }
+      ],
+      "adjustments": [
+        "Scores capped because the test attempts none of the atomic requirements"
+      ],
+      "correctness_reasoning": "The test only verifies a balance increase and ignores ordering, FX lock, timeout, and approval logic.",
+      "bug_detection_reasoning": "It cannot detect bugs related to the critical requirements of the specification.",
+      "risks": [
+        "Missing verification of credit/debit order, FX rate lock, timeout handling, and approval workflow."
+      ]
+    },
+    {
+      "test_case_id": "tc-2",
+      "quality_score": 41.0,
+      "spec_coverage_score": 6.25,
+      "coverage_ratio": 0.5,
+      "correctness_score": 4.0,
+      "bug_detection_score": 3.0,
+      "llm_correctness_score": 4.0,
+      "llm_bug_detection_score": 3.0,
+      "assessments": [
+        {
+          "requirement_id": "fx-lock",
+          "status": "partial",
+          "evidence": "Check that FX rate shown equals rate at initiation time",
+          "reasoning": "Only confirms the displayed rate matches initiation, not that the rate remains locked for the transaction.",
+          "llm_status": "partial"
+        },
+        {
+          "requirement_id": "credit-before-debit",
+          "status": "not_applicable",
+          "evidence": "Initiate top-up of USD 100",
+          "reasoning": "The test does not address credit or debit ordering.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "timeout-after-5s",
+          "status": "not_applicable",
+          "evidence": "Check that FX rate shown equals rate at initiation time",
+          "reasoning": "No timeout behavior is exercised.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "rollback-on-timeout",
+          "status": "not_applicable",
+          "evidence": "FX rate matches rate locked at initiation",
+          "reasoning": "Rollback is not part of this test.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "neither-side-affected",
+          "status": "not_applicable",
+          "evidence": "FX rate matches rate locked at initiation",
+          "reasoning": "Rollback effects are not examined.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "approval-above-10000",
+          "status": "not_applicable",
+          "evidence": "Initiate top-up of USD 100",
+          "reasoning": "Amount is below the approval threshold.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "second-owner-approval",
+          "status": "not_applicable",
+          "evidence": "Check that FX rate shown equals rate at initiation time",
+          "reasoning": "No approval step is involved.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "no-settle-before-approval",
+          "status": "not_applicable",
+          "evidence": "FX rate matches rate locked at initiation",
+          "reasoning": "Settlement timing is not examined.",
+          "llm_status": "not_applicable"
+        }
+      ],
+      "adjustments": [
+        "Bug detection capped at 5 because no attempted requirement is fully covered"
+      ],
+      "correctness_reasoning": "The test partially validates FX rate locking but does not ensure the rate stays fixed throughout processing.",
+      "bug_detection_reasoning": "It can catch mismatched displayed rates but not deeper locking failures.",
+      "risks": [
+        "The test may miss cases where the FX rate changes after initiation despite the displayed rate being correct at start."
+      ]
+    },
+    {
+      "test_case_id": "tc-3",
+      "quality_score": 70.0,
+      "spec_coverage_score": 25.0,
+      "coverage_ratio": 1.0,
+      "correctness_score": 5.0,
+      "bug_detection_score": 5.0,
+      "llm_correctness_score": 5.0,
+      "llm_bug_detection_score": 5.0,
+      "assessments": [
+        {
+          "requirement_id": "fx-lock",
+          "status": "not_applicable",
+          "evidence": "Initiate top-up",
+          "reasoning": "FX rate handling is not exercised.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "credit-before-debit",
+          "status": "not_applicable",
+          "evidence": "Simulate provider timeout",
+          "reasoning": "The test does not verify ordering of credit and debit.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "timeout-after-5s",
+          "status": "not_applicable",
+          "evidence": "Simulate provider timeout",
+          "reasoning": "The timeout duration is not specified as 5 seconds.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "rollback-on-timeout",
+          "status": "covered",
+          "evidence": "Simulate provider timeout",
+          "reasoning": "The test triggers a timeout and expects the transaction to be rolled back.",
+          "llm_status": "covered"
+        },
+        {
+          "requirement_id": "neither-side-affected",
+          "status": "covered",
+          "evidence": "Wallet balance unchanged and funding source not debited",
+          "reasoning": "It verifies that both destination wallet and funding source remain unchanged after rollback.",
+          "llm_status": "covered"
+        },
+        {
+          "requirement_id": "approval-above-10000",
+          "status": "not_applicable",
+          "evidence": "Initiate top-up",
+          "reasoning": "No large\u2011amount approval scenario is involved.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "second-owner-approval",
+          "status": "not_applicable",
+          "evidence": "Check wallet balance",
+          "reasoning": "Approval ownership is not part of this test.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "no-settle-before-approval",
+          "status": "not_applicable",
+          "evidence": "Wallet balance unchanged",
+          "reasoning": "Settlement blocking is not examined.",
+          "llm_status": "not_applicable"
+        }
+      ],
+      "adjustments": [],
+      "correctness_reasoning": "The test correctly validates rollback behavior and that neither side is affected, though it omits the 5\u2011second timeout detail.",
+      "bug_detection_reasoning": "It can detect failures to roll back on provider timeouts and unintended side effects.",
+      "risks": [
+        "The test does not confirm that the timeout occurs after exactly 5 seconds, so timing\u2011related bugs may go unnoticed."
+      ]
+    },
+    {
+      "test_case_id": "tc-4",
+      "quality_score": 21.67,
+      "spec_coverage_score": 6.25,
+      "coverage_ratio": 0.1667,
+      "correctness_score": 3.0,
+      "bug_detection_score": 2.0,
+      "llm_correctness_score": 4.0,
+      "llm_bug_detection_score": 3.0,
+      "assessments": [
+        {
+          "requirement_id": "fx-lock",
+          "status": "not_applicable",
+          "evidence": "Initiate top-up of SGD 15,000",
+          "reasoning": "FX rate handling is not addressed.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "credit-before-debit",
+          "status": "not_applicable",
+          "evidence": "Check approval screen appears",
+          "reasoning": "The test does not verify credit/debit ordering.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "timeout-after-5s",
+          "status": "not_applicable",
+          "evidence": "Initiate top-up of SGD 15,000",
+          "reasoning": "No timeout behavior is exercised.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "rollback-on-timeout",
+          "status": "not_applicable",
+          "evidence": "Approval screen is shown",
+          "reasoning": "Rollback is not part of this scenario.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "neither-side-affected",
+          "status": "not_applicable",
+          "evidence": "Check approval screen appears",
+          "reasoning": "Side\u2011effect verification is absent.",
+          "llm_status": "not_applicable"
+        },
+        {
+          "requirement_id": "approval-above-10000",
+          "status": "partial",
+          "evidence": "Check approval screen appears",
+          "reasoning": "The test confirms that an approval UI appears for a top\u2011up above SGD\u202f10,000.",
+          "llm_status": "covered"
+        },
+        {
+          "requirement_id": "second-owner-approval",
+          "status": "missing",
+          "evidence": "Check approval screen appears",
+          "reasoning": "It only verifies that approval is required, not that it comes from a second business owner.",
+          "llm_status": "partial"
+        },
+        {
+          "requirement_id": "no-settle-before-approval",
+          "status": "missing",
+          "evidence": "Initiate top-up of SGD 15,000",
+          "reasoning": "The test does not check whether settlement is blocked before approval.",
+          "llm_status": "not_applicable"
+        }
+      ],
+      "adjustments": [
+        "Missed no-settle-before-approval: The test initiates a large top-up, making it the appropriate place to verify that settlement does not occur before approval.",
+        "Deterministic cap changed approval-above-10000 from covered to partial",
+        "Deterministic cap changed second-owner-approval from partial to missing",
+        "Critic correctness adjustment -1.0",
+        "Critic bug-detection adjustment -1.0",
+        "Bug detection capped at 5 because no attempted requirement is fully covered"
+      ],
+      "correctness_reasoning": "The test validates the presence of an approval step for large top\u2011ups but does not confirm owner identity or settlement blocking.",
+      "bug_detection_reasoning": "It can detect missing approval screens but may miss violations of second\u2011owner or pre\u2011approval settlement rules.",
+      "risks": [
+        "The test does not ensure that approval is performed by a second business owner nor that the transaction is held pending approval."
+      ]
+    }
+  ],
+  "suite": {
+    "gate_score": 37.5,
+    "mean_quality_score": 35.42,
+    "best_statuses": {
+      "fx-lock": "partial",
+      "credit-before-debit": "missing",
+      "timeout-after-5s": "missing",
+      "rollback-on-timeout": "covered",
+      "neither-side-affected": "covered",
+      "approval-above-10000": "partial",
+      "second-owner-approval": "missing",
+      "no-settle-before-approval": "missing"
+    },
+    "absolute_misses": [
+      "credit-before-debit",
+      "timeout-after-5s",
+      "second-owner-approval",
+      "no-settle-before-approval"
+    ]
+  },
+  "usage": [
+    {
+      "run_id": "run-01",
+      "stage": "primary_judge",
+      "model": "gpt-oss:120b",
+      "attempt": 1,
+      "latency_ms": 10619.72,
+      "recovered_from_thinking": false,
+      "estimated_cost_usd": 0.002433156,
+      "input_tokens": 1134,
+      "cached_input_tokens": 1104,
+      "output_tokens": 4022,
+      "cached_tokens_known": true,
+      "cost_assumption": null,
+      "validation_error": null
+    },
+    {
+      "run_id": "run-01",
+      "stage": "independent_critic",
+      "model": "gemma4:31b",
+      "attempt": 1,
+      "latency_ms": 2319.36,
+      "recovered_from_thinking": false,
+      "estimated_cost_usd": 0.0007337400000000001,
+      "input_tokens": 4001,
+      "cached_input_tokens": 0,
+      "output_tokens": 434,
+      "cached_tokens_known": true,
+      "cost_assumption": null,
+      "validation_error": null
+    }
+  ],
+  "estimated_cost_usd": 0.0031669
+}

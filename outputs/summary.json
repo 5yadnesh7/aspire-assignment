@@ -1,0 +1,223 @@
+{
+  "completed_runs": 5,
+  "failed_runs": 0,
+  "gate_scores": [
+    37.5,
+    43.75,
+    56.25,
+    50.0,
+    37.5
+  ],
+  "per_test_quality": {
+    "tc-1": {
+      "values": [
+        9.0,
+        12.0,
+        32.0,
+        0.0,
+        15.0
+      ],
+      "mean": 13.6,
+      "sample_stdev": 11.72,
+      "min": 0.0,
+      "max": 32.0,
+      "range": 32.0
+    },
+    "tc-2": {
+      "values": [
+        41.0,
+        85.0,
+        67.0,
+        70.0,
+        29.5
+      ],
+      "mean": 58.5,
+      "sample_stdev": 22.66,
+      "min": 29.5,
+      "max": 85.0,
+      "range": 55.5
+    },
+    "tc-3": {
+      "values": [
+        70.0,
+        79.0,
+        63.33,
+        69.33,
+        43.0
+      ],
+      "mean": 64.93,
+      "sample_stdev": 13.48,
+      "min": 43.0,
+      "max": 79.0,
+      "range": 36.0
+    },
+    "tc-4": {
+      "values": [
+        21.67,
+        33.67,
+        21.67,
+        34.0,
+        29.5
+      ],
+      "mean": 28.1,
+      "sample_stdev": 6.13,
+      "min": 21.67,
+      "max": 34.0,
+      "range": 12.33
+    }
+  },
+  "requirement_agreement": {
+    "fx-lock": {
+      "mode": "covered",
+      "agreement_rate": 0.6,
+      "statuses": [
+        "partial",
+        "covered",
+        "covered",
+        "covered",
+        "partial"
+      ]
+    },
+    "credit-before-debit": {
+      "mode": "missing",
+      "agreement_rate": 0.8,
+      "statuses": [
+        "missing",
+        "missing",
+        "partial",
+        "missing",
+        "missing"
+      ]
+    },
+    "timeout-after-5s": {
+      "mode": "missing",
+      "agreement_rate": 0.6,
+      "statuses": [
+        "missing",
+        "missing",
+        "partial",
+        "partial",
+        "missing"
+      ]
+    },
+    "rollback-on-timeout": {
+      "mode": "covered",
+      "agreement_rate": 1.0,
+      "statuses": [
+        "covered",
+        "covered",
+        "covered",
+        "covered",
+        "covered"
+      ]
+    },
+    "neither-side-affected": {
+      "mode": "covered",
+      "agreement_rate": 1.0,
+      "statuses": [
+        "covered",
+        "covered",
+        "covered",
+        "covered",
+        "covered"
+      ]
+    },
+    "approval-above-10000": {
+      "mode": "partial",
+      "agreement_rate": 1.0,
+      "statuses": [
+        "partial",
+        "partial",
+        "partial",
+        "partial",
+        "partial"
+      ]
+    },
+    "second-owner-approval": {
+      "mode": "missing",
+      "agreement_rate": 1.0,
+      "statuses": [
+        "missing",
+        "missing",
+        "missing",
+        "missing",
+        "missing"
+      ]
+    },
+    "no-settle-before-approval": {
+      "mode": "missing",
+      "agreement_rate": 1.0,
+      "statuses": [
+        "missing",
+        "missing",
+        "missing",
+        "missing",
+        "missing"
+      ]
+    }
+  },
+  "calibration": {
+    "quality_target": 75.0,
+    "observed_mean": 45.0,
+    "observed_sample_stdev": 8.15,
+    "observed_min": 37.5,
+    "observed_max": 56.25,
+    "observed_range": 18.75,
+    "recommended_threshold": 75.0,
+    "reason": "The quality target is outside the observed run-to-run score range.",
+    "absolute_rule": "Block when any critical requirement has a best status of missing or incorrect, regardless of the numeric threshold."
+  },
+  "verdicts_at_recommended_threshold": [
+    {
+      "run_id": "run-01",
+      "verdict": "BLOCK"
+    },
+    {
+      "run_id": "run-02",
+      "verdict": "BLOCK"
+    },
+    {
+      "run_id": "run-03",
+      "verdict": "BLOCK"
+    },
+    {
+      "run_id": "run-04",
+      "verdict": "BLOCK"
+    },
+    {
+      "run_id": "run-05",
+      "verdict": "BLOCK"
+    }
+  ],
+  "verdict_flip": false,
+  "llm_calls": 12,
+  "validation_failure_count": 0,
+  "json_validity_rate": 1.0,
+  "estimated_cost_usd": 0.01682758,
+  "cost_by_model": {
+    "gpt-oss:120b": 0.0131449,
+    "gemma4:31b": 0.00368268
+  },
+  "latency_ms": {
+    "min": 1746.34,
+    "median": 5210.58,
+    "max": 10619.72
+  },
+  "models": {
+    "primary_judge": {
+      "model": "gpt-oss:120b",
+      "catalog_digest": "d98fe6ba01e6"
+    },
+    "independent_critic": {
+      "model": "gemma4:31b",
+      "catalog_digest": "221b330d11a8"
+    }
+  },
+  "provider": {
+    "name": "ollama_cloud",
+    "base_url": "https://ollama.com",
+    "pricing_source": "https://ollama.com/pricing",
+    "pricing_retrieved_at": "2026-10-24",
+    "native_schema_constrained_output": false
+  }
+}

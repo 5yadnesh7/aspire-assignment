@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "provider": {
+    "name": "ollama_cloud",
+    "base_url": "https://ollama.com",
+    "api_key_env": "OLLAMA_API_KEY",
+    "pricing_source": "https://ollama.com/pricing",
+    "pricing_retrieved_at": "2026-10-24",
+    "currency": "USD",
+    "price_unit": "per_1m_tokens",
+    "native_schema_constrained_output": false,
+    "structured_output_strategy": "prompt_for_json_then_validate_with_pydantic"
+  },
+  "pipeline": {
+    "evaluation_runs": 5,
+    "temperature": 0.1,
+    "max_validation_retries": 1,
+    "preserve_every_raw_response": true,
+    "quality_target": 75,
+    "score_weights": {
+      "coverage": 0.4,
+      "correctness": 0.3,
+      "bug_detection": 0.3
+    }
+  },
+  "models": {
+    "primary_judge": {
+      "model": "gpt-oss:120b",
+      "catalog_digest": "d98fe6ba01e6",
+      "capabilities": [
+        "completion",
+        "tools",
+        "thinking"
+      ],
+      "pricing_usd_per_1m_tokens": {
+        "input": 0.15,
+        "cached_input": 0.014,
+        "output": 0.6
+      }
+    },
+    "independent_critic": {
+      "model": "gemma4:31b",
+      "catalog_digest": "221b330d11a8",
+      "capabilities": [
+        "completion",
+        "thinking",
+        "tools",
+        "vision"
+      ],
+      "pricing_usd_per_1m_tokens": {
+        "input": 0.14,
+        "cached_input": 0.05,
+        "output": 0.4
+      }
+    }
+  },
+  "usage_fields": {
+    "input_tokens": "prompt_eval_count",
+    "cached_input_tokens": "prompt_eval_cached_count",
+    "output_tokens": "eval_count",
+    "latency_nanoseconds": "total_duration"
+  },
+  "cost_tracking": {
+    "formula": "((uncached_input_tokens * input_rate) + (cached_input_tokens * cached_input_rate) + (output_tokens * output_rate)) / 1000000",
+    "uncached_input_tokens_formula": "max(input_tokens - cached_input_tokens, 0)",
+    "record_by": [
+      "run_id",
+      "stage",
+      "model",
+      "attempt"
+    ],
+    "retry_costs_are_included": true,
+    "max_estimated_usd": 1.0,
+    "missing_cached_token_policy": "price_all_input_tokens_at_uncached_rate"
+  }
+}

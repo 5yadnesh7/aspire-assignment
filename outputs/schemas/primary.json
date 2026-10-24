@@ -1,0 +1,103 @@
+{
+  "$defs": {
+    "RequirementAssessment": {
+      "properties": {
+        "requirement_id": {
+          "title": "Requirement Id",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "evidence": {
+          "default": "",
+          "title": "Evidence",
+          "type": "string"
+        },
+        "reasoning": {
+          "default": "",
+          "title": "Reasoning",
+          "type": "string"
+        },
+        "llm_status": {
+          "default": "",
+          "title": "Llm Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "requirement_id",
+        "status"
+      ],
+      "title": "RequirementAssessment",
+      "type": "object"
+    },
+    "TestEvaluation": {
+      "properties": {
+        "test_case_id": {
+          "title": "Test Case Id",
+          "type": "string"
+        },
+        "requirement_assessments": {
+          "items": {
+            "$ref": "#/$defs/RequirementAssessment"
+          },
+          "title": "Requirement Assessments",
+          "type": "array"
+        },
+        "correctness_score": {
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Correctness Score",
+          "type": "number"
+        },
+        "bug_detection_score": {
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Bug Detection Score",
+          "type": "number"
+        },
+        "correctness_reasoning": {
+          "default": "",
+          "title": "Correctness Reasoning",
+          "type": "string"
+        },
+        "bug_detection_reasoning": {
+          "default": "",
+          "title": "Bug Detection Reasoning",
+          "type": "string"
+        },
+        "risks": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Risks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "test_case_id",
+        "requirement_assessments",
+        "correctness_score",
+        "bug_detection_score"
+      ],
+      "title": "TestEvaluation",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "evaluations": {
+      "items": {
+        "$ref": "#/$defs/TestEvaluation"
+      },
+      "title": "Evaluations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "evaluations"
+  ],
+  "title": "PrimaryResponse",
+  "type": "object"
+}

@@ -1,0 +1,112 @@
+{
+  "$defs": {
+    "ReviewNote": {
+      "properties": {
+        "requirement_id": {
+          "title": "Requirement Id",
+          "type": "string"
+        },
+        "issue": {
+          "title": "Issue",
+          "type": "string"
+        }
+      },
+      "required": [
+        "requirement_id",
+        "issue"
+      ],
+      "title": "ReviewNote",
+      "type": "object"
+    },
+    "StatusAdjustment": {
+      "properties": {
+        "requirement_id": {
+          "title": "Requirement Id",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "reason": {
+          "default": "",
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "requirement_id",
+        "status"
+      ],
+      "title": "StatusAdjustment",
+      "type": "object"
+    },
+    "TestReview": {
+      "properties": {
+        "test_case_id": {
+          "title": "Test Case Id",
+          "type": "string"
+        },
+        "unsupported_claims": {
+          "items": {
+            "$ref": "#/$defs/ReviewNote"
+          },
+          "title": "Unsupported Claims",
+          "type": "array"
+        },
+        "missed_requirements": {
+          "items": {
+            "$ref": "#/$defs/ReviewNote"
+          },
+          "title": "Missed Requirements",
+          "type": "array"
+        },
+        "adjusted_statuses": {
+          "items": {
+            "$ref": "#/$defs/StatusAdjustment"
+          },
+          "title": "Adjusted Statuses",
+          "type": "array"
+        },
+        "correctness_adjustment": {
+          "default": 0,
+          "maximum": 0,
+          "minimum": -10,
+          "title": "Correctness Adjustment",
+          "type": "number"
+        },
+        "bug_detection_adjustment": {
+          "default": 0,
+          "maximum": 0,
+          "minimum": -10,
+          "title": "Bug Detection Adjustment",
+          "type": "number"
+        },
+        "notes": {
+          "default": "",
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "test_case_id"
+      ],
+      "title": "TestReview",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "reviews": {
+      "items": {
+        "$ref": "#/$defs/TestReview"
+      },
+      "title": "Reviews",
+      "type": "array"
+    }
+  },
+  "required": [
+    "reviews"
+  ],
+  "title": "CriticResponse",
+  "type": "object"
+}

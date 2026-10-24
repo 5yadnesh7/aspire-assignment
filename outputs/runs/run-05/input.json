@@ -1,0 +1,43 @@
+{
+  "tests": [
+    {
+      "id": "tc-1",
+      "description": "Verify that a wallet top-up completes successfully",
+      "steps": [
+        "Initiate top-up of SGD 500",
+        "Check wallet balance increases"
+      ],
+      "expectedResult": "Wallet balance increases by SGD 500"
+    },
+    {
+      "id": "tc-2",
+      "description": "Verify FX rate is applied correctly",
+      "steps": [
+        "Initiate top-up of USD 100",
+        "Check that FX rate shown equals rate at initiation time"
+      ],
+      "expectedResult": "FX rate matches rate locked at initiation"
+    },
+    {
+      "id": "tc-3",
+      "description": "Verify rollback on timeout",
+      "steps": [
+        "Initiate top-up",
+        "Simulate provider timeout",
+        "Check wallet balance"
+      ],
+      "expectedResult": "Wallet balance unchanged and funding source not debited"
+    },
+    {
+      "id": "tc-4",
+      "description": "Verify large top-up requires approval",
+      "steps": [
+        "Initiate top-up of SGD 15,000",
+        "Check approval screen appears"
+      ],
+      "expectedResult": "Approval screen is shown"
+    }
+  ],
+  "hidden_from_model": [],
+  "primary_prompt_sha256": "870cfbd869457772ca40e093fb5d5e908ee4a7366f0e784d1e200cbb2fa31ba8"
+}
